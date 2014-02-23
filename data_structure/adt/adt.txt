@@ -1,0 +1,12 @@
+Q: The node definition of double link list is as following:
+typedef struct node
+{
+    int date;
+    struct node *front, *next;
+}TNode;
+
+There are two double list. A and B, and their head pointer is pHeadA, pHeadB.
+The data member in all nodes of A is difference. The data member in all nodes of
+B is difference, either.
+
+Please write a function to delete  all the nodes with same data value in A and B.

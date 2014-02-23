@@ -1,0 +1,25 @@
+Q: Insert proper code to the following program which reverse the order of all nodes in one linked list.
+
+typedef struct linknode
+{
+    int data;
+    struct linknode *next;
+}node;
+
+node * reverse(node *head)
+{
+    node *p, *q, *r;
+    p=head;
+    q=p->next;
+    which (______)
+    {
+        r=q->next;
+        ______;
+        p=q;
+        q=r;
+    }
+
+    ____;
+    head=p;
+    return head;
+}

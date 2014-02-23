@@ -1,0 +1,1 @@
+Q: What the difference between the type char, int, long ? What the difference between signed and unsigned type?

@@ -1,3 +1,4 @@
+Q: What's the output of the following code ?
 void main()
 {
     int a = 5, b = 7, c;
