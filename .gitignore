@@ -1,6 +1,7 @@
 *.o
 *.out
 *.bak
+*~
 
 # built application files
 #*.apk
