@@ -1,22 +1,40 @@
-
-char (*p1Fun) (int);
-
-
-typedef char(*PFUN)(int);
-PFUN p2Fun;
+#include <stdio.h>
 
 char gFun(int a)
 {
     printf(":%d\n", a);
+    return 'Y';
 }
 
-void main()
+/* Method 1 */
+char (*p1Fun) (int);
+
+/* Method 2 */
+typedef char(*PFUN)(int);
+PFUN p2Fun;
+
+/* Method 3 */
+void fp_wrapper(int i, PFUN handler)
 {
+    handler(i);
+    (*handler)(i);
+    ((PFUN)(*handler))(i);
+}
+
+int main()
+{
+    /* Method 1 */
     p1Fun = gFun;
     (*p1Fun) (2);
+    p1Fun (2);
 
+    /* Method 2 */
     p2Fun = gFun;
     (*p2Fun)(3);
+    p2Fun(3);
+
+    /* Method 3 */
+    fp_wrapper(4,gFun);
 }
 
 
@@ -29,4 +47,6 @@ void main()
  * typedef函数指针用法
  * http://blog.csdn.net/qll125596718/article/details/6891881
  * google search 'typedef  函数指针' and acpi_table_handler
+ * C/C++ 函数指针 总结
+ * http://blog.csdn.net/wangshihui512/article/details/9787125
 */
