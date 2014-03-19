@@ -1,6 +1,8 @@
+int jason(int a)
+{
+  return a*8184;
+}
 int main()
 {
-  int a=1;
-  int b=a*8184;
-  return b;
-  }
+  return jason(1000);
+}

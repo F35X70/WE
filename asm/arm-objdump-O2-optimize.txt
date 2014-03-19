@@ -32,11 +32,11 @@ Disassembly of section .note.gnu.build-id:
     818c:	00000014 	andeq	r0, r0, r4, lsl r0
     8190:	00000003 	andeq	r0, r0, r3
     8194:	00554e47 	subseq	r4, r5, r7, asr #28
-    8198:	12f88730 	rscsne	r8, r8, #12582912	; 0xc00000
-    819c:	6b6b9d18 	blvs	1aef604 <__bss_end__+0x1ade5dc>
-    81a0:	90ce9600 	sbcls	r9, lr, r0, lsl #12
-    81a4:	f2956d83 	vqdmull.s16	q3, d21, d3
-    81a8:	6b71938f 	blvs	1c6cfec <__bss_end__+0x1c5bfc4>
+    8198:	4de7d588 	cfstr64mi	mvdx13, [r7, #544]!	; 0x220
+    819c:	83472085 	movthi	r2, #28805	; 0x7085
+    81a0:	a7420569 	strbge	r0, [r2, -r9, ror #10]
+    81a4:	ff385c32 			; <UNDEFINED> instruction: 0xff385c32
+    81a8:	d081334e 	addle	r3, r1, lr, asr #6
 
 Disassembly of section .gnu.hash:
 
@@ -125,7 +125,7 @@ Disassembly of section .init:
 00008294 <_init>:
 _init():
     8294:	b508      	push	{r3, lr}
-    8296:	f000 f841 	bl	831c <call_gmon_start>
+    8296:	f000 f843 	bl	8320 <call_gmon_start>
     829a:	bf00      	nop
     829c:	bd08      	pop	{r3, pc}
 
@@ -153,131 +153,138 @@ Disassembly of section .text:
 
 000082dc <main>:
 main():
-    82dc:	f641 70f8 	movw	r0, #8184	; 0x1ff8
-    82e0:	4770      	bx	lr
-    82e2:	bf00      	nop
+    82dc:	f24e 00c0 	movw	r0, #57536	; 0xe0c0
+    82e0:	f2c0 007c 	movt	r0, #124	; 0x7c
+    82e4:	4770      	bx	lr
+    82e6:	bf00      	nop
 
-000082e4 <_start>:
+000082e8 <_start>:
 _start():
-    82e4:	f04f 0b00 	mov.w	fp, #0
-    82e8:	f04f 0e00 	mov.w	lr, #0
-    82ec:	f85d 1b04 	ldr.w	r1, [sp], #4
-    82f0:	466a      	mov	r2, sp
-    82f2:	f84d 2d04 	str.w	r2, [sp, #-4]!
-    82f6:	f84d 0d04 	str.w	r0, [sp, #-4]!
-    82fa:	f8df c014 	ldr.w	ip, [pc, #20]	; 8310 <_start+0x2c>
-    82fe:	f84d cd04 	str.w	ip, [sp, #-4]!
-    8302:	4804      	ldr	r0, [pc, #16]	; (8314 <_start+0x30>)
-    8304:	4b04      	ldr	r3, [pc, #16]	; (8318 <_start+0x34>)
-    8306:	f7ff efd6 	blx	82b4 <_init+0x20>
-    830a:	f7ff efe2 	blx	82d0 <_init+0x3c>
-    830e:	83a10000 			; <UNDEFINED> instruction: 0x83a10000
-    8312:	82dd0000 	sbcshi	r0, sp, #0
-    8316:	835d0000 	cmphi	sp, #0
+    82e8:	f04f 0b00 	mov.w	fp, #0
+    82ec:	f04f 0e00 	mov.w	lr, #0
+    82f0:	f85d 1b04 	ldr.w	r1, [sp], #4
+    82f4:	466a      	mov	r2, sp
+    82f6:	f84d 2d04 	str.w	r2, [sp, #-4]!
+    82fa:	f84d 0d04 	str.w	r0, [sp, #-4]!
+    82fe:	f8df c014 	ldr.w	ip, [pc, #20]	; 8314 <_start+0x2c>
+    8302:	f84d cd04 	str.w	ip, [sp, #-4]!
+    8306:	4804      	ldr	r0, [pc, #16]	; (8318 <_start+0x30>)
+    8308:	4b04      	ldr	r3, [pc, #16]	; (831c <_start+0x34>)
+    830a:	f7ff efd4 	blx	82b4 <_init+0x20>
+    830e:	f7ff efe0 	blx	82d0 <_init+0x3c>
+    8312:	83ad0000 			; <UNDEFINED> instruction: 0x83ad0000
+    8316:	82dd0000 	sbcshi	r0, sp, #0
+    831a:	83690000 	cmnhi	r9, #0
 	...
 
-0000831c <call_gmon_start>:
+00008320 <call_gmon_start>:
 call_gmon_start():
-    831c:	4b03      	ldr	r3, [pc, #12]	; (832c <call_gmon_start+0x10>)
-    831e:	4a04      	ldr	r2, [pc, #16]	; (8330 <call_gmon_start+0x14>)
-    8320:	447b      	add	r3, pc
-    8322:	589b      	ldr	r3, [r3, r2]
-    8324:	b10b      	cbz	r3, 832a <call_gmon_start+0xe>
-    8326:	f7ff bfcb 	b.w	82c0 <_init+0x2c>
-    832a:	4770      	bx	lr
-    832c:	00008cdc 	ldrdeq	r8, [r0], -ip
-    8330:	00000018 	andeq	r0, r0, r8, lsl r0
+    8320:	4b03      	ldr	r3, [pc, #12]	; (8330 <call_gmon_start+0x10>)
+    8322:	4a04      	ldr	r2, [pc, #16]	; (8334 <call_gmon_start+0x14>)
+    8324:	447b      	add	r3, pc
+    8326:	589b      	ldr	r3, [r3, r2]
+    8328:	b10b      	cbz	r3, 832e <call_gmon_start+0xe>
+    832a:	f7ff bfc9 	b.w	82c0 <_init+0x2c>
+    832e:	4770      	bx	lr
+    8330:	00008cd8 	ldrdeq	r8, [r0], -r8	; <UNPREDICTABLE>
+    8334:	00000018 	andeq	r0, r0, r8, lsl r0
 
-00008334 <__do_global_dtors_aux>:
+00008338 <__do_global_dtors_aux>:
 __do_global_dtors_aux():
-    8334:	4b02      	ldr	r3, [pc, #8]	; (8340 <__do_global_dtors_aux+0xc>)
-    8336:	781a      	ldrb	r2, [r3, #0]
-    8338:	b90a      	cbnz	r2, 833e <__do_global_dtors_aux+0xa>
-    833a:	2201      	movs	r2, #1
-    833c:	701a      	strb	r2, [r3, #0]
-    833e:	4770      	bx	lr
-    8340:	00011024 	andeq	r1, r1, r4, lsr #32
+    8338:	4b02      	ldr	r3, [pc, #8]	; (8344 <__do_global_dtors_aux+0xc>)
+    833a:	781a      	ldrb	r2, [r3, #0]
+    833c:	b90a      	cbnz	r2, 8342 <__do_global_dtors_aux+0xa>
+    833e:	2201      	movs	r2, #1
+    8340:	701a      	strb	r2, [r3, #0]
+    8342:	4770      	bx	lr
+    8344:	00011024 	andeq	r1, r1, r4, lsr #32
 
-00008344 <frame_dummy>:
+00008348 <frame_dummy>:
 frame_dummy():
-    8344:	4803      	ldr	r0, [pc, #12]	; (8354 <frame_dummy+0x10>)
-    8346:	b508      	push	{r3, lr}
-    8348:	6803      	ldr	r3, [r0, #0]
-    834a:	b113      	cbz	r3, 8352 <frame_dummy+0xe>
-    834c:	4b02      	ldr	r3, [pc, #8]	; (8358 <frame_dummy+0x14>)
-    834e:	b103      	cbz	r3, 8352 <frame_dummy+0xe>
-    8350:	4798      	blx	r3
-    8352:	bd08      	pop	{r3, pc}
-    8354:	00010f14 	andeq	r0, r1, r4, lsl pc
-    8358:	00000000 	andeq	r0, r0, r0
+    8348:	4803      	ldr	r0, [pc, #12]	; (8358 <frame_dummy+0x10>)
+    834a:	b508      	push	{r3, lr}
+    834c:	6803      	ldr	r3, [r0, #0]
+    834e:	b113      	cbz	r3, 8356 <frame_dummy+0xe>
+    8350:	4b02      	ldr	r3, [pc, #8]	; (835c <frame_dummy+0x14>)
+    8352:	b103      	cbz	r3, 8356 <frame_dummy+0xe>
+    8354:	4798      	blx	r3
+    8356:	bd08      	pop	{r3, pc}
+    8358:	00010f14 	andeq	r0, r1, r4, lsl pc
+    835c:	00000000 	andeq	r0, r0, r0
 
-0000835c <__libc_csu_init>:
+00008360 <jason>:
+jason():
+    8360:	ebc0 2080 	rsb	r0, r0, r0, lsl #10
+    8364:	00c0      	lsls	r0, r0, #3
+    8366:	4770      	bx	lr
+
+00008368 <__libc_csu_init>:
 __libc_csu_init():
-    835c:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
-    8360:	4606      	mov	r6, r0
-    8362:	4d0d      	ldr	r5, [pc, #52]	; (8398 <__libc_csu_init+0x3c>)
-    8364:	460f      	mov	r7, r1
-    8366:	f8df 9034 	ldr.w	r9, [pc, #52]	; 839c <__libc_csu_init+0x40>
-    836a:	4690      	mov	r8, r2
-    836c:	447d      	add	r5, pc
-    836e:	f7ff ff91 	bl	8294 <_init>
-    8372:	44f9      	add	r9, pc
-    8374:	ebc5 0909 	rsb	r9, r5, r9
-    8378:	ea5f 09a9 	movs.w	r9, r9, asr #2
-    837c:	d00a      	beq.n	8394 <__libc_csu_init+0x38>
-    837e:	3d04      	subs	r5, #4
-    8380:	2400      	movs	r4, #0
-    8382:	f855 3f04 	ldr.w	r3, [r5, #4]!
-    8386:	4630      	mov	r0, r6
-    8388:	4639      	mov	r1, r7
-    838a:	4642      	mov	r2, r8
-    838c:	3401      	adds	r4, #1
-    838e:	4798      	blx	r3
-    8390:	454c      	cmp	r4, r9
-    8392:	d1f6      	bne.n	8382 <__libc_csu_init+0x26>
-    8394:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
-    8398:	00008b9c 	muleq	r0, ip, fp
-    839c:	00008b9a 	muleq	r0, sl, fp
+    8368:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+    836c:	4606      	mov	r6, r0
+    836e:	4d0d      	ldr	r5, [pc, #52]	; (83a4 <__libc_csu_init+0x3c>)
+    8370:	460f      	mov	r7, r1
+    8372:	f8df 9034 	ldr.w	r9, [pc, #52]	; 83a8 <__libc_csu_init+0x40>
+    8376:	4690      	mov	r8, r2
+    8378:	447d      	add	r5, pc
+    837a:	f7ff ff8b 	bl	8294 <_init>
+    837e:	44f9      	add	r9, pc
+    8380:	ebc5 0909 	rsb	r9, r5, r9
+    8384:	ea5f 09a9 	movs.w	r9, r9, asr #2
+    8388:	d00a      	beq.n	83a0 <__libc_csu_init+0x38>
+    838a:	3d04      	subs	r5, #4
+    838c:	2400      	movs	r4, #0
+    838e:	f855 3f04 	ldr.w	r3, [r5, #4]!
+    8392:	4630      	mov	r0, r6
+    8394:	4639      	mov	r1, r7
+    8396:	4642      	mov	r2, r8
+    8398:	3401      	adds	r4, #1
+    839a:	4798      	blx	r3
+    839c:	454c      	cmp	r4, r9
+    839e:	d1f6      	bne.n	838e <__libc_csu_init+0x26>
+    83a0:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+    83a4:	00008b90 	muleq	r0, r0, fp
+    83a8:	00008b8e 	andeq	r8, r0, lr, lsl #23
 
-000083a0 <__libc_csu_fini>:
+000083ac <__libc_csu_fini>:
 __libc_csu_fini():
-    83a0:	4770      	bx	lr
-    83a2:	bf00      	nop
+    83ac:	4770      	bx	lr
+    83ae:	bf00      	nop
 
 Disassembly of section .fini:
 
-000083a4 <_fini>:
+000083b0 <_fini>:
 _fini():
-    83a4:	b508      	push	{r3, lr}
-    83a6:	bf00      	nop
-    83a8:	bd08      	pop	{r3, pc}
+    83b0:	b508      	push	{r3, lr}
+    83b2:	bf00      	nop
+    83b4:	bd08      	pop	{r3, pc}
 
 Disassembly of section .rodata:
 
-000083ac <_IO_stdin_used>:
-    83ac:	00020001 	andeq	r0, r2, r1
+000083b8 <_IO_stdin_used>:
+    83b8:	00020001 	andeq	r0, r2, r1
 
 Disassembly of section .ARM.exidx:
 
-000083b0 <.ARM.exidx>:
-    83b0:	7fffff34 	svcvc	0x00ffff34
-    83b4:	00000001 	andeq	r0, r0, r1
+000083bc <.ARM.exidx>:
+    83bc:	7fffff2c 	svcvc	0x00ffff2c
+    83c0:	00000001 	andeq	r0, r0, r1
 
 Disassembly of section .eh_frame:
 
-000083b8 <__FRAME_END__>:
-    83b8:	00000000 	andeq	r0, r0, r0
+000083c4 <__FRAME_END__>:
+    83c4:	00000000 	andeq	r0, r0, r0
 
 Disassembly of section .init_array:
 
 00010f0c <__frame_dummy_init_array_entry>:
 __init_array_start():
-   10f0c:	00008345 	andeq	r8, r0, r5, asr #6
+   10f0c:	00008349 	andeq	r8, r0, r9, asr #6
 
 Disassembly of section .fini_array:
 
 00010f10 <__do_global_dtors_aux_fini_array_entry>:
-   10f10:	00008335 	andeq	r8, r0, r5, lsr r3
+   10f10:	00008339 	andeq	r8, r0, r9, lsr r3
 
 Disassembly of section .jcr:
 
@@ -292,7 +299,7 @@ Disassembly of section .dynamic:
    10f20:	0000000c 	andeq	r0, r0, ip
    10f24:	00008295 	muleq	r0, r5, r2
    10f28:	0000000d 	andeq	r0, r0, sp
-   10f2c:	000083a5 	andeq	r8, r0, r5, lsr #7
+   10f2c:	000083b1 			; <UNDEFINED> instruction: 0x000083b1
    10f30:	00000019 	andeq	r0, r0, r9, lsl r0
    10f34:	00010f0c 	andeq	r0, r1, ip, lsl #30
    10f38:	0000001b 	andeq	r0, r0, fp, lsl r0

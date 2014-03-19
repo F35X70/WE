@@ -32,11 +32,11 @@ Disassembly of section .note.gnu.build-id:
     818c:	00000014 	andeq	r0, r0, r4, lsl r0
     8190:	00000003 	andeq	r0, r0, r3
     8194:	00554e47 	subseq	r4, r5, r7, asr #28
-    8198:	b1116e19 	tstlt	r1, r9, lsl lr
-    819c:	54d83e85 	ldrbpl	r3, [r8], #3717	; 0xe85
-    81a0:	6ae441aa 	bvs	ff918850 <__bss_end__+0xff907828>
-    81a4:	e8ad8998 	stmia	sp!, {r3, r4, r7, r8, fp, pc}
-    81a8:	b06adb49 	rsblt	sp, sl, r9, asr #22
+    8198:	81c97635 	bichi	r7, r9, r5, lsr r6
+    819c:	a4b5ea08 	ldrtge	lr, [r5], #2568	; 0xa08
+    81a0:	1b3ddc2d 	blne	f7f25c <__bss_end__+0xf6e234>
+    81a4:	6f80b2b5 	svcvs	0x0080b2b5
+    81a8:	38a30818 	stmiacc	r3!, {r3, r4, fp}
 
 Disassembly of section .gnu.hash:
 
@@ -165,9 +165,9 @@ _start():
     82fc:	4b04      	ldr	r3, [pc, #16]	; (8310 <_start+0x34>)
     82fe:	f7ff efda 	blx	82b4 <_init+0x20>
     8302:	f7ff efe6 	blx	82d0 <_init+0x3c>
-    8306:	83c50000 	bichi	r0, r5, #0
-    830a:	83550000 	cmphi	r5, #0
-    830e:	83810000 	orrhi	r0, r1, #0
+    8306:	83d10000 	bicshi	r0, r1, #0
+    830a:	83790000 	cmnhi	r9, #0
+    830e:	838d0000 	orrhi	r0, sp, #0
 	...
 
 00008314 <call_gmon_start>:
@@ -205,83 +205,91 @@ frame_dummy():
     834c:	00010f14 	andeq	r0, r1, r4, lsl pc
     8350:	00000000 	andeq	r0, r0, r0
 
-00008354 <main>:
-main():
+00008354 <jason>:
+jason():
     8354:	b480      	push	{r7}
     8356:	b083      	sub	sp, #12
     8358:	af00      	add	r7, sp, #0
-    835a:	f04f 0301 	mov.w	r3, #1
-    835e:	603b      	str	r3, [r7, #0]
-    8360:	683a      	ldr	r2, [r7, #0]
-    8362:	4613      	mov	r3, r2
-    8364:	ea4f 2383 	mov.w	r3, r3, lsl #10
-    8368:	1a9b      	subs	r3, r3, r2
-    836a:	ea4f 03c3 	mov.w	r3, r3, lsl #3
-    836e:	607b      	str	r3, [r7, #4]
-    8370:	687b      	ldr	r3, [r7, #4]
-    8372:	4618      	mov	r0, r3
-    8374:	f107 070c 	add.w	r7, r7, #12
-    8378:	46bd      	mov	sp, r7
-    837a:	bc80      	pop	{r7}
-    837c:	4770      	bx	lr
-    837e:	bf00      	nop
+    835a:	6078      	str	r0, [r7, #4]
+    835c:	687a      	ldr	r2, [r7, #4]
+    835e:	4613      	mov	r3, r2
+    8360:	ea4f 2383 	mov.w	r3, r3, lsl #10
+    8364:	1a9b      	subs	r3, r3, r2
+    8366:	ea4f 03c3 	mov.w	r3, r3, lsl #3
+    836a:	4618      	mov	r0, r3
+    836c:	f107 070c 	add.w	r7, r7, #12
+    8370:	46bd      	mov	sp, r7
+    8372:	bc80      	pop	{r7}
+    8374:	4770      	bx	lr
+    8376:	bf00      	nop
 
-00008380 <__libc_csu_init>:
+00008378 <main>:
+main():
+    8378:	b580      	push	{r7, lr}
+    837a:	af00      	add	r7, sp, #0
+    837c:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+    8380:	f7ff ffe8 	bl	8354 <jason>
+    8384:	4603      	mov	r3, r0
+    8386:	4618      	mov	r0, r3
+    8388:	bd80      	pop	{r7, pc}
+    838a:	bf00      	nop
+
+0000838c <__libc_csu_init>:
 __libc_csu_init():
-    8380:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
-    8384:	4606      	mov	r6, r0
-    8386:	4d0d      	ldr	r5, [pc, #52]	; (83bc <__libc_csu_init+0x3c>)
-    8388:	460f      	mov	r7, r1
-    838a:	f8df 9034 	ldr.w	r9, [pc, #52]	; 83c0 <__libc_csu_init+0x40>
-    838e:	4690      	mov	r8, r2
-    8390:	447d      	add	r5, pc
-    8392:	f7ff ff7f 	bl	8294 <_init>
-    8396:	44f9      	add	r9, pc
-    8398:	ebc5 0909 	rsb	r9, r5, r9
-    839c:	ea5f 09a9 	movs.w	r9, r9, asr #2
-    83a0:	d00a      	beq.n	83b8 <__libc_csu_init+0x38>
-    83a2:	3d04      	subs	r5, #4
-    83a4:	2400      	movs	r4, #0
-    83a6:	f855 3f04 	ldr.w	r3, [r5, #4]!
-    83aa:	4630      	mov	r0, r6
-    83ac:	4639      	mov	r1, r7
-    83ae:	4642      	mov	r2, r8
-    83b0:	3401      	adds	r4, #1
-    83b2:	4798      	blx	r3
-    83b4:	454c      	cmp	r4, r9
-    83b6:	d1f6      	bne.n	83a6 <__libc_csu_init+0x26>
-    83b8:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
-    83bc:	00008b78 	andeq	r8, r0, r8, ror fp
-    83c0:	00008b76 	andeq	r8, r0, r6, ror fp
+    838c:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+    8390:	4606      	mov	r6, r0
+    8392:	4d0d      	ldr	r5, [pc, #52]	; (83c8 <__libc_csu_init+0x3c>)
+    8394:	460f      	mov	r7, r1
+    8396:	f8df 9034 	ldr.w	r9, [pc, #52]	; 83cc <__libc_csu_init+0x40>
+    839a:	4690      	mov	r8, r2
+    839c:	447d      	add	r5, pc
+    839e:	f7ff ff79 	bl	8294 <_init>
+    83a2:	44f9      	add	r9, pc
+    83a4:	ebc5 0909 	rsb	r9, r5, r9
+    83a8:	ea5f 09a9 	movs.w	r9, r9, asr #2
+    83ac:	d00a      	beq.n	83c4 <__libc_csu_init+0x38>
+    83ae:	3d04      	subs	r5, #4
+    83b0:	2400      	movs	r4, #0
+    83b2:	f855 3f04 	ldr.w	r3, [r5, #4]!
+    83b6:	4630      	mov	r0, r6
+    83b8:	4639      	mov	r1, r7
+    83ba:	4642      	mov	r2, r8
+    83bc:	3401      	adds	r4, #1
+    83be:	4798      	blx	r3
+    83c0:	454c      	cmp	r4, r9
+    83c2:	d1f6      	bne.n	83b2 <__libc_csu_init+0x26>
+    83c4:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+    83c8:	00008b6c 	andeq	r8, r0, ip, ror #22
+    83cc:	00008b6a 	andeq	r8, r0, sl, ror #22
 
-000083c4 <__libc_csu_fini>:
+000083d0 <__libc_csu_fini>:
 __libc_csu_fini():
-    83c4:	4770      	bx	lr
-    83c6:	bf00      	nop
+    83d0:	4770      	bx	lr
+    83d2:	bf00      	nop
 
 Disassembly of section .fini:
 
-000083c8 <_fini>:
+000083d4 <_fini>:
 _fini():
-    83c8:	b508      	push	{r3, lr}
-    83ca:	bf00      	nop
-    83cc:	bd08      	pop	{r3, pc}
+    83d4:	b508      	push	{r3, lr}
+    83d6:	bf00      	nop
+    83d8:	bd08      	pop	{r3, pc}
 
 Disassembly of section .rodata:
 
-000083d0 <_IO_stdin_used>:
-    83d0:	00020001 	andeq	r0, r2, r1
+000083dc <_IO_stdin_used>:
+    83dc:	00020001 	andeq	r0, r2, r1
 
 Disassembly of section .ARM.exidx:
 
-000083d4 <.ARM.exidx>:
-    83d4:	7fffff08 	svcvc	0x00ffff08
-    83d8:	00000001 	andeq	r0, r0, r1
+000083e0 <.ARM.exidx>:
+    83e0:	7ffffefc 	svcvc	0x00fffefc
+    83e4:	00000001 	andeq	r0, r0, r1
 
 Disassembly of section .eh_frame:
 
-000083dc <__FRAME_END__>:
-    83dc:	00000000 	andeq	r0, r0, r0
+000083e8 <__FRAME_END__>:
+    83e8:	00000000 	andeq	r0, r0, r0
 
 Disassembly of section .init_array:
 
@@ -307,7 +315,7 @@ Disassembly of section .dynamic:
    10f20:	0000000c 	andeq	r0, r0, ip
    10f24:	00008295 	muleq	r0, r5, r2
    10f28:	0000000d 	andeq	r0, r0, sp
-   10f2c:	000083c9 	andeq	r8, r0, r9, asr #7
+   10f2c:	000083d5 	ldrdeq	r8, [r0], -r5
    10f30:	00000019 	andeq	r0, r0, r9, lsl r0
    10f34:	00010f0c 	andeq	r0, r1, ip, lsl #30
    10f38:	0000001b 	andeq	r0, r0, fp, lsl r0
