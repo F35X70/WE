@@ -1,0 +1,37 @@
+Q: structure of boot.img
+
+
+A:
+ 52 /*
+ 53 ** +-----------------+ 
+ 54 ** | boot header     | 1 page
+ 55 ** +-----------------+
+ 56 ** | kernel          | n pages  
+ 57 ** +-----------------+
+ 58 ** | ramdisk         | m pages  
+ 59 ** +-----------------+
+ 60 ** | second stage    | o pages
+ 61 ** +-----------------+
+ 62 **
+ 63 ** n = (kernel_size + page_size - 1) / page_size
+ 64 ** m = (ramdisk_size + page_size - 1) / page_size
+ 65 ** o = (second_size + page_size - 1) / page_size
+ 66 **
+ 67 ** 0. all entities are page_size aligned in flash
+ 68 ** 1. kernel and ramdisk are required (size != 0)
+ 69 ** 2. second is optional (second_size == 0 -> no second)
+ 70 ** 3. load each element (kernel, ramdisk, second) at
+ 71 **    the specified physical address (kernel_addr, etc)
+ 72 ** 4. prepare tags at tag_addr.  kernel_args[] is
+ 73 **    appended to the kernel commandline in the tags.
+ 74 ** 5. r0 = 0, r1 = MACHINE_TYPE, r2 = tags_addr
+ 75 ** 6. if second_size != 0: jump to second_addr
+ 76 **    else: jump to kernel_addr
+ 77 */
+
+Reference:
+  system/core/mkbootimg/bootimg.h
+Android boot.img 结构
+http://www.linuxidc.com/Linux/2011-03/33303.htm
+
+
