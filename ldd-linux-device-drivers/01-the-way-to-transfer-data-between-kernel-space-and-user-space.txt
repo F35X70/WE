@@ -1,0 +1,40 @@
+Q:
+The way to transfer data between user space and kernel space.
+A:
+1. 内核启动参数
+2. 模块参数与sysfs
+3. sysctl
+4. 系统调用 copy_to_user/copy_from_user ? put_user/get_user
+5. netlink
+6. procfs
+7. seq_file
+8. debugfs
+9. relayfs
+
+内存映射机制 mmap ?
+信号
+brk()
+
+------------------------------------------------------------------------------
+mmap
+使用mmap()函数通常映射一个普通文件实现进程之间内存共享，即多个进程打开同一个文件，将文件映射到各自进程的虚拟空间。这样各个进程就可以通过共享的内存进行大量的数据交互，当然需要我们自己设计互斥功能。  
+还可以使用mmap()函数实现内核空间和用户空间内存共享的功能。网上提到的方法
+基本都是proc文件+mmap。 大体过程如下 
+1、在模块中申请一些内存页面，作为共享的内存空间。 
+2、创建可读的proc文件，在其读函数中把上面申请的内存空间的物理地址返回给进程空间。 
+3、在进程空间open /dev/mem文件，并把从proc读取的物理地址（要共享的内存的物理地址）作为文件/dev/mem的offset，以此offset 把/dev/mem文件的若干空间用mmap映射到进程空间。 注意： 
+1、/dev/mem 不是一个普通的文件里面的内容是所有物理内存的内容信息。所以，在上面的过程中把共享空间的物理地址作为offset使用。 
+2、proc文件的作用就是提供一个读取的函数，把共享内存的地址从内核空间传递到用户空间。也可以用设备的ioctl 把该物理地址数值传给用户空间
+
+------------------------------------------------------------------------------
+Refernece:
+在 Linux 下用户空间与内核空间数据交换的方式，第 1 部分: 内核启动参数、模块参数与sysfs、sysctl、系统调用和netlink
+https://www.ibm.com/developerworks/cn/linux/l-kerns-usrs/
+在 Linux 下用户空间与内核空间数据交换的方式，第 2 部分: procfs、seq_file、debugfs和relayfs
+https://www.ibm.com/developerworks/cn/linux/l-kerns-usrs2/
+内核与用户空间信息交互方式小结
+http://blog.chinaunix.net/uid-27177626-id-4148819.html
+User space memory access from the Linux kernel
+http://www.ibm.com/developerworks/library/l-kernel-memory-access/
+使用 Linux 系统调用的内核命令
+https://www.ibm.com/developerworks/cn/linux/l-system-calls/
