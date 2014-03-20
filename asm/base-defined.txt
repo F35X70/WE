@@ -1,0 +1,11 @@
+
+* flags:
+'#'井号后面的数是常数, e.g. sub sp, #12
+'[]'中括号内的数或寄存器是指针, str r0, [r7,#4]
+'()'小括号内的数为数值注释, e.g. ldr r3, [pc, #16] ; (831c <_start+0x34>)
+
+
+
+
+笔记——ARM汇编基础
+http://blog.chinaunix.net/uid-26885722-id-3184336.html
