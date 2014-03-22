@@ -2,3 +2,7 @@ Micron
 Q12:
 For a single computer processor computer system. what is the purpose of a processor
 cache and describe its operation
+
+
+Reference
+http://www.allinterview.com/showanswers/18149.html
