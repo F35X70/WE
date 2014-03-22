@@ -25,7 +25,7 @@ DeteleNode(Node * pHeader, DataType Value)
 			delete		pNode;
 			pNode = pNextNode;
 			bRet = TRUE;
-            //¿¿break¿return, ¿¿¿¿
+      //ä¸è¦breakæˆ–return, åˆ é™¤æ‰€æœ‰
 		} else {
 			pNode = pNode->next;
 		}
