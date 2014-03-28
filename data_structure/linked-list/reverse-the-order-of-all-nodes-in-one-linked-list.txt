@@ -1,4 +1,5 @@
-Q: Insert proper code to the following program which reverse the order of all nodes in one linked list.
+Micron
+Q5: Insert proper code to the following program which reverse the order of all nodes in one linked list.
 
 typedef struct linknode
 {

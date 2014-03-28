@@ -1,0 +1,7 @@
+
+
+
+* Reference
+http://stackoverflow.com/questions/11250739/linux-device-driver-to-allow-an-fpga-to-dma-directly-to-cpu-ram
+Linux PCI-E 接口驱动之DMA篇
+http://www.embexperts.com/forum.php?mod=viewthread&tid=8
