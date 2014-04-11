@@ -1,0 +1,14 @@
+
+
+红黑树
+B 树
+B+ 树
+Trie 树
+
+
+
+开源世界中的算法与数据结构 3 – Linux IPv6 FIB表实现
+http://www.kernelchina.org/content/开源世界中的算法与数据结构-3-–-linux-ipv6-fib表实现
+Some more:
+http://www.kernelchina.org/content/why-leave
+
