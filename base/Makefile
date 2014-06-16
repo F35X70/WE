@@ -1,0 +1,5 @@
+
+
+
+objects := $(wildcard *.c)
+
