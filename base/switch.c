@@ -2,7 +2,8 @@
 int switch1()
 {
   int n;
-  for (int c=0;c<=6;c++)
+  int c;
+  for (c=0;c<=6;c++)
   {
     n=0;
     printf("begin switch c:%d\n",c);
@@ -37,7 +38,8 @@ int switch2()
 {
   int n;
     n=0;
-  for (int c=0;c<=6;c++)
+  int c;
+  for (c=0;c<=6;c++)
   {
     printf("begin switch c:%d\n",c);
     switch(c) {
